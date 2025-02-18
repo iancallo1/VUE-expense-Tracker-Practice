@@ -3,10 +3,10 @@
      <Header/>
      <div class="container">
      
-        <Balance :total="total"/>
+        <Balance :total="+total"/>
         <IncomeExpenses :income="+income" :expenses="+expenses"/>
         <TransactionList :transactions="transactions"/>
-        <AddTransaction/>
+        <AddTransaction @transaction-submitted="handleTransactionSubmitted"/>
 
 
      </div>
@@ -55,6 +55,23 @@ const expenses = computed (() => {
         return acc + transaction.amount
     }, 0)
 }); 
+
+//This is how a Add new transaction is made
+const handleTransactionSubmitted = (transactionData) => {
+    console.log(transactionData);
+    transactions.value.push({
+        id: generateUniqueId(),
+        text: transactionData.text,
+        amount: transactionData.amount
+    });
+
+   console.log(generateUniqueId()); 
+};
+
+//This is how unique ID for each entry is made
+const generateUniqueId = () => {
+    return Math.floor(Math.random() * 1000000);
+};
 
 </script>
 
