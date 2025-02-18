@@ -1,3 +1,8 @@
+
+![💰__VUE JS_Expense_Tracker__📊](https://github.com/user-attachments/assets/bc79d15a-4299-405e-9fa5-c5ffe91c641b)
+
+
+
 # vue-expense-tracker
 ### "Track your income and expenses effortlessly with this simple Vue.js budgeting app! 💰📊
 This template helped me get started developing with Vue 3 in Vite.
