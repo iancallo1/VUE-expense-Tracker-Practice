@@ -4,8 +4,12 @@
      <div class="container">
      
         <Balance :total="+total"/>
+
         <IncomeExpenses :income="+income" :expenses="+expenses"/>
-        <TransactionList :transactions="transactions"/>
+
+        <TransactionList :transactions="transactions" 
+        @transactionDeleted="handleTransactionDeleted"/>
+
         <AddTransaction @transaction-submitted="handleTransactionSubmitted"/>
 
 
@@ -22,7 +26,11 @@ import IncomeExpenses from'./components/IncomeExpenses.vue'
 import TransactionList from'./components/TransactionList.vue' 
 import AddTransaction from'./components/AddTransaction.vue' 
 
+import { useToast } from 'vue-toastification'
+
 import {ref, computed} from 'vue';
+
+const toast = useToast();
 
 const transactions = ref ([
         {id:1,text:'Flower',amount:-19.99},
@@ -65,12 +73,20 @@ const handleTransactionSubmitted = (transactionData) => {
         amount: transactionData.amount
     });
 
-   console.log(generateUniqueId()); 
+   toast.success('Transaction added');
+    console.log(generateUniqueId()); 
 };
 
 //This is how unique ID for each entry is made
 const generateUniqueId = () => {
     return Math.floor(Math.random() * 1000000);
+};
+
+//Delete transaction
+const handleTransactionDeleted = (id) => {
+    transactions.value = transactions.value.filter((transaction) => 
+    transaction.id !== id);
+    toast.success('Transaction deleted');
 };
 
 </script>
